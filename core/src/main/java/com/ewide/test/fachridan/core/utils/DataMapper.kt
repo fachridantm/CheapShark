@@ -6,7 +6,9 @@ import com.ewide.test.fachridan.core.domain.model.Deal
 object DataMapper {
     fun dealsItemToDeal(data: DealsResponseItem): Deal = Deal(
         id = data.dealID,
-        name = data.title ?: "-",
-        imageUrl = data.thumb
+        title = data.title ?: "-",
+        normalPrice = data.normalPrice ?: "-",
+        salePrice = data.salePrice ?: "-",
+        thumb = data.thumb
     )
 }
