@@ -6,12 +6,12 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemLoadingStateBinding
+import com.ewide.test.fachridan.core.databinding.ItemDealsLoadStateBinding
 
 class DealsLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<DealsLoadStateAdapter.LoadingStateViewHolder>() {
     inner class LoadingStateViewHolder(
-        private val binding: ItemLoadingStateBinding,
+        private val binding: ItemDealsLoadStateBinding,
         retry: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -40,7 +40,7 @@ class DealsLoadStateAdapter(private val retry: () -> Unit) :
         loadState: LoadState
     ): LoadingStateViewHolder {
         val binding =
-            ItemLoadingStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemDealsLoadStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadingStateViewHolder(binding, retry)
     }
 }
