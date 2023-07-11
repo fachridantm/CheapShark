@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CheapShark</string>
+    <string name="data_is_empty">Data is empty, no data to be shown.</string>
+    <string name="item_clicked">%s was clicked</string>
 </resources>
