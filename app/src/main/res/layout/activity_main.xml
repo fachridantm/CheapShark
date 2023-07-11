@@ -19,7 +19,7 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/md_theme_light_primary"
+            android:background="@color/md_theme_dark_primary"
             app:menu="@menu/menu_main" />
 
     </com.google.android.material.appbar.AppBarLayout>

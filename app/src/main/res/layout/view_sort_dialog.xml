@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tv_sort_title"
+        style="@style/Text.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_dialog_title"
+        android:textAlignment="textStart" />
+
+    <RadioGroup
+        android:id="@+id/rg_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_sort_default"
+            style="@style/Text.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="@color/md_theme_light_primary"
+            android:checked="true"
+            android:text="@string/sort_default_label" />
+
+        <RadioButton
+            android:id="@+id/rb_sort_title"
+            style="@style/Text.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="@color/md_theme_light_primary"
+            android:text="@string/sort_title_label" />
+
+        <RadioButton
+            android:id="@+id/rb_sort_price"
+            style="@style/Text.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:buttonTint="@color/md_theme_light_primary"
+            android:text="@string/sort_price_label" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/submit" />
+
+</LinearLayout>

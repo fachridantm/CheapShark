@@ -4,8 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.SearchView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingData
 import com.ewide.test.fachridan.R
@@ -95,11 +98,67 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 }
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.menu_sort -> {
+                            sortHandler()
+                            true
+                        }
+
+                        R.id.menu_favorite -> {
+                            // TODO: Intent to Favorite Activity
+                            getString(R.string.favorite).showToast(this@MainActivity)
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
             }
         }
     }
 
+    private fun sortHandler() {
+        val builder = AlertDialog.Builder(this, R.style.AlertDialog).create()
+        val view = View.inflate(this, R.layout.view_sort_dialog, null)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.rg_sort)
+        val btnSubmit = view.findViewById<Button>(R.id.btn_submit)
+
+        btnSubmit.setOnClickListener {
+            when (radioGroup.checkedRadioButtonId) {
+                R.id.rb_sort_default -> {
+                    // TODO: Sorting data by default
+                    getString(R.string.sort_default_label).showToast(this)
+                }
+
+                R.id.rb_sort_title -> {
+                    // TODO: Sorting data by title
+                    getString(R.string.sort_title_label).showToast(this)
+                }
+
+                R.id.rb_sort_price -> {
+                    // TODO: Sorting data by price
+                    getString(R.string.sort_price_label).showToast(this)
+                }
+            }
+            builder.dismiss()
+        }
+
+        builder.apply {
+            setView(view)
+            setCancelable(true)
+            show()
+        }
+
+    }
+
     private fun onItemClicked(deal: Deal) {
+        // TODO: Intent to Detail Activity
         getString(R.string.item_clicked, deal.title).showToast(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.toolbarMain.menu.findItem(R.id.search_view).actionView?.clearFocus()
     }
 }

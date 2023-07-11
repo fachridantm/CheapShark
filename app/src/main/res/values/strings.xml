@@ -6,4 +6,10 @@
     <string name="search_hint">Find deals game here…</string>
     <string name="favorite">Favorite</string>
     <string name="sort">Sort</string>
+
+    <string name="sort_dialog_title">Sort by:</string>
+    <string name="sort_default_label">Default</string>
+    <string name="sort_title_label">Title</string>
+    <string name="sort_price_label">Price</string>
+    <string name="submit">Submit</string>
 </resources>
