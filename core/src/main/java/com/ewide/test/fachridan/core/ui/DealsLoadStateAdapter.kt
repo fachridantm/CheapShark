@@ -8,8 +8,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ewide.test.fachridan.core.databinding.ItemLoadingStateBinding
 
-class LoadingStateAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
+class DealsLoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<DealsLoadStateAdapter.LoadingStateViewHolder>() {
     inner class LoadingStateViewHolder(
         private val binding: ItemLoadingStateBinding,
         retry: () -> Unit
