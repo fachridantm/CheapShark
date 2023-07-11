@@ -21,4 +21,12 @@
     <style name="Text.Subtitle.Bold">
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="Text.Error">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/circularstd_medium</item>
+    </style>
 </resources>
