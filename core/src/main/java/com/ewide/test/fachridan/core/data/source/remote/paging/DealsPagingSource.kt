@@ -17,16 +17,15 @@ class DealsPagingSource (private val mainApiService: MainApiService) : PagingSou
 
         return try {
             val response = mainApiService.getListOfDeals(pageSize, pageNumber)
-            val data = response.dealsResponse
 
-            if (data.isEmpty()) {
+            if (response.isEmpty()) {
                 Log.e("DealsPagingSource", "load: No more data")
                 LoadResult.Error(Exception("No more data"))
             } else {
                 LoadResult.Page(
-                    data = data,
+                    data = response,
                     prevKey = if (pageNumber == 0) null else pageNumber - pageSize,
-                    nextKey = if (pageNumber == pageSize) null else pageNumber + pageSize,
+                    nextKey = if (response.size < pageSize) null else pageNumber + pageSize,
                 )
             }
         } catch (e: Exception) {

@@ -29,9 +29,9 @@ class NetworkModule {
                     }
                 )
             )
-            .connectTimeout(300, TimeUnit.MILLISECONDS)
-            .readTimeout(300, TimeUnit.MILLISECONDS)
-            .writeTimeout(300, TimeUnit.MILLISECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 
