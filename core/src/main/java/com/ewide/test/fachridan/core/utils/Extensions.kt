@@ -22,6 +22,8 @@ fun HttpException.getErrorMessage(): String? {
         if (response.startsWith("{")) {
             val jsonObject = JSONObject(response)
             jsonObject.getString("message")
+        } else if (response.equals("Too Many Results - Refine Search")) {
+            "End of Items"
         } else {
             response
         }
