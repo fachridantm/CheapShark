@@ -3,8 +3,10 @@ package com.ewide.test.fachridan.core.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcelable
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
@@ -32,6 +34,14 @@ fun String.showSnackBar(context: Context) {
         this,
         Snackbar.LENGTH_SHORT
     ).show()
+}
+
+fun TextView.showStrikeThrough() {
+    paintFlags = paintFlags or STRIKE_THRU_TEXT_FLAG
+}
+
+fun String.convertToPrice(): String {
+    return "$this $"
 }
 
 @Suppress("DEPRECATION")
