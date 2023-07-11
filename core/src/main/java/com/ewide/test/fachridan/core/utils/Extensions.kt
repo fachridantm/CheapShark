@@ -19,8 +19,12 @@ fun HttpException.getErrorMessage(): String? {
     val response = this.response()?.errorBody()?.string()
     if (response.isNullOrEmpty()) return "Something went wrong"
     return try {
-        val jsonObject = JSONObject(response)
-        jsonObject.getString("message")
+        if (response.startsWith("{")) {
+            val jsonObject = JSONObject(response)
+            jsonObject.getString("message")
+        } else {
+            response
+        }
     } catch (e: Exception) {
         e.printStackTrace()
         e.message.toString()
