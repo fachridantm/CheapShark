@@ -2,4 +2,8 @@
     <string name="app_name">CheapShark</string>
     <string name="data_is_empty">Data is empty, no data to be shown.</string>
     <string name="item_clicked">%s was clicked</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Find deals game here…</string>
+    <string name="favorite">Favorite</string>
+    <string name="sort">Sort</string>
 </resources>

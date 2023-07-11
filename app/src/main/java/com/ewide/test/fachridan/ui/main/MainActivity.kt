@@ -1,7 +1,10 @@
 package com.ewide.test.fachridan.ui.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
+import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingData
@@ -12,6 +15,7 @@ import com.ewide.test.fachridan.core.ui.DealsAdapter
 import com.ewide.test.fachridan.core.ui.DealsLoadStateAdapter
 import com.ewide.test.fachridan.core.utils.showToast
 import com.ewide.test.fachridan.databinding.ActivityMainBinding
+import com.ewide.test.fachridan.ui.search.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
         viewModel.getListOfDeals().observe(this) {
-            when(it) {
+            when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
@@ -70,6 +74,27 @@ class MainActivity : AppCompatActivity() {
                 adapter = dealsAdapter.withLoadStateFooter(
                     footer = DealsLoadStateAdapter { dealsAdapter.retry() }
                 )
+            }
+            toolbarMain.apply {
+                val searchView = menu.findItem(R.id.search_view).actionView as SearchView
+
+                searchView.apply {
+                    inputType = InputType.TYPE_NULL
+                    isIconifiedByDefault = false
+                    queryHint = getString(R.string.search_hint)
+                    background = getDrawable(R.drawable.bg_transparent)
+
+                    setOnQueryTextFocusChangeListener { _, hasFocus ->
+                        if (hasFocus) {
+                            startActivity(Intent(context, SearchResultActivity::class.java))
+                        }
+                    }
+
+                    setOnClickListener {
+                        startActivity(Intent(context, SearchResultActivity::class.java))
+                    }
+
+                }
             }
         }
     }
