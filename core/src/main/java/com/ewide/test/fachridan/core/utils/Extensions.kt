@@ -6,8 +6,11 @@ import android.content.Intent
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcelable
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.load.engine.GlideException
+import com.ewide.test.fachridan.core.di.GlideApp
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -38,6 +41,16 @@ fun String.showSnackBar(context: Context) {
 
 fun TextView.showStrikeThrough() {
     paintFlags = paintFlags or STRIKE_THRU_TEXT_FLAG
+}
+
+fun ImageView.loadGameImage(url: String) {
+    try {
+        GlideApp.with(this.context)
+            .load(url)
+            .into(this)
+    } catch (e: GlideException) {
+        e.logRootCauses("GlideException")
+    }
 }
 
 fun String.convertToPrice(): String {
