@@ -54,7 +54,7 @@ fun ImageView.loadGameImage(url: String) {
 }
 
 fun String.convertToPrice(): String {
-    return "$this $"
+    return "$$this"
 }
 
 @Suppress("DEPRECATION")
