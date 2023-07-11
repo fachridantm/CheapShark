@@ -7,8 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val dealsUseCase: DealsUseCase
-) : ViewModel() {
+class MainViewModel @Inject constructor(private val dealsUseCase: DealsUseCase) : ViewModel() {
     fun getListOfDeals() = dealsUseCase.getListOfDeals().asLiveData()
 }
