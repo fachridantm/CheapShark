@@ -10,7 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.load.engine.GlideException
+import com.ewide.test.fachridan.core.R
 import com.ewide.test.fachridan.core.di.GlideApp
+import com.ewide.test.fachridan.core.di.GlideOptions
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -53,6 +55,9 @@ fun ImageView.loadImage(url: String) {
     try {
         GlideApp.with(this.context)
             .load(url)
+            .apply(
+                GlideOptions.placeholderOf(R.drawable.img_placeholder)
+            )
             .into(this)
     } catch (e: GlideException) {
         e.logRootCauses("GlideException")
