@@ -73,7 +73,7 @@ fun String.convertToPrice(): String {
 
 fun Long.toDate(): String {
     val date = Date(this * 1000) // Convert the Unix timestamp to milliseconds
-    val pattern = "EEE, dd MMM yyyy hh:mm a zzz"
+    val pattern = "EEE, dd MMM yyyy at hh:mm a zzz"
     val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
     return dateFormat.format(date)
 }
