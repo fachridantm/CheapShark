@@ -18,13 +18,13 @@ class DealsAdapter(private val onItemClick: (Deal) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(deal: Deal) {
             with(binding) {
-                tvTitle.text = deal.title
-                tvNormalPrice.apply {
+                itemDealTvTitle.text = deal.title
+                itemDealTvNormalPrice.apply {
                     text = deal.normalPrice.convertToPrice()
                     showStrikeThrough()
                 }
-                tvSalePrice.text = deal.salePrice.convertToPrice()
-                ivGame.loadGameImage(deal.thumb)
+                itemDealTvSalePrice.text = deal.salePrice.convertToPrice()
+                itemDealIvGame.loadGameImage(deal.thumb)
                 itemView.setOnClickListener { onItemClick(deal) }
             }
         }
