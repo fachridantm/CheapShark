@@ -49,7 +49,7 @@ fun TextView.showStrikeThrough() {
     paintFlags = paintFlags or STRIKE_THRU_TEXT_FLAG
 }
 
-fun ImageView.loadGameImage(url: String) {
+fun ImageView.loadImage(url: String) {
     try {
         GlideApp.with(this.context)
             .load(url)

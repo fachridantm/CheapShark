@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ewide.test.fachridan.core.databinding.ItemListDealBinding
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.utils.convertToPrice
-import com.ewide.test.fachridan.core.utils.loadGameImage
+import com.ewide.test.fachridan.core.utils.loadImage
 import com.ewide.test.fachridan.core.utils.showStrikeThrough
 
 class DealsAdapter(private val onItemClick: (Deal) -> Unit) :
@@ -24,7 +24,7 @@ class DealsAdapter(private val onItemClick: (Deal) -> Unit) :
                     showStrikeThrough()
                 }
                 itemDealTvSalePrice.text = deal.salePrice.convertToPrice()
-                itemDealIvGame.loadGameImage(deal.thumb)
+                itemDealIvGame.loadImage(deal.thumb)
                 itemView.setOnClickListener { onItemClick(deal) }
             }
         }
