@@ -100,12 +100,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 setOnMenuItemClickListener {
                     when (it.itemId) {
-                        R.id.menu_sort -> {
+                        R.id.action_sort -> {
                             sortHandler()
                             true
                         }
 
-                        R.id.menu_favorite -> {
+                        R.id.action_favorite -> {
                             // TODO: Intent to Favorite Activity
                             getString(R.string.favorite).showToast(this@MainActivity)
                             true

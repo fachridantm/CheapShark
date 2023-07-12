@@ -9,12 +9,12 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_sort"
+        android:id="@+id/action_sort"
         android:title="@string/sort"
         app:showAsAction="collapseActionView" />
 
     <item
-        android:id="@+id/menu_favorite"
+        android:id="@+id/action_favorite"
         android:title="@string/favorite"
         app:showAsAction="collapseActionView" />
 </menu>
