@@ -16,6 +16,9 @@ import com.ewide.test.fachridan.core.di.GlideOptions
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import retrofit2.HttpException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 fun HttpException.getErrorMessage(): String? {
     val response = this.response()?.errorBody()?.string()
@@ -66,6 +69,13 @@ fun ImageView.loadImage(url: String) {
 
 fun String.convertToPrice(): String {
     return "$$this"
+}
+
+fun Long.toDate(): String {
+    val date = Date(this * 1000) // Convert the Unix timestamp to milliseconds
+    val pattern = "EEE, dd MMM yyyy hh:mm a zzz"
+    val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
+    return dateFormat.format(date)
 }
 
 @Suppress("DEPRECATION")
