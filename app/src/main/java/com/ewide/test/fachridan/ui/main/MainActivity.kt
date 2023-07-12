@@ -16,8 +16,10 @@ import com.ewide.test.fachridan.core.data.source.Resource
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.ui.DealsAdapter
 import com.ewide.test.fachridan.core.ui.DealsLoadStateAdapter
+import com.ewide.test.fachridan.core.utils.Constants.EXTRA_DATA
 import com.ewide.test.fachridan.core.utils.showToast
 import com.ewide.test.fachridan.databinding.ActivityMainBinding
+import com.ewide.test.fachridan.ui.details.GameDetailsActivity
 import com.ewide.test.fachridan.ui.search.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,9 +51,10 @@ class MainActivity : AppCompatActivity() {
                     showLoading(false)
                     if (it.data != null) {
                         dealsAdapter.submitData(lifecycle, it.data as PagingData<Deal>)
+                        binding.tvMainEmpty.visibility = View.GONE
                     } else {
                         dealsAdapter.submitData(lifecycle, PagingData.empty())
-                        getString(R.string.data_is_empty).showToast(this)
+                        binding.tvMainEmpty.visibility = View.VISIBLE
                     }
                 }
 
@@ -153,8 +156,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onItemClicked(deal: Deal) {
-        // TODO: Intent to Detail Activity
-        getString(R.string.item_clicked, deal.title).showToast(this)
+        val intentToDetail = Intent(this, GameDetailsActivity::class.java)
+        intentToDetail.putExtra(EXTRA_DATA, deal)
+        startActivity(intentToDetail)
     }
 
     override fun onResume() {

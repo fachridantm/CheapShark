@@ -15,4 +15,6 @@
     <string name="game_details_title">Game Details</string>
     <string name="steam_app_id">Steam App ID: %s</string>
     <string name="cheapest_price_ever">Cheapest Price Ever!</string>
+    <string name="ends_date">Grab it now before %s</string>
+    <string name="check_other_stores">Check other stores</string>
 </resources>
