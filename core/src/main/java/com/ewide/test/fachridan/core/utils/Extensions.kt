@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.load.engine.GlideException
+import com.ewide.test.fachridan.core.BuildConfig.HOST
 import com.ewide.test.fachridan.core.R
 import com.ewide.test.fachridan.core.di.GlideApp
 import com.ewide.test.fachridan.core.di.GlideOptions
@@ -73,9 +74,13 @@ fun String.convertToPrice(): String {
 
 fun Long.toDate(): String {
     val date = Date(this * 1000) // Convert the Unix timestamp to milliseconds
-    val pattern = "EEE, dd MMM yyyy at hh:mm a zzz"
+    val pattern = "EEE, dd MMM yyyy HH:mm zzz"
     val dateFormat = SimpleDateFormat(pattern, Locale.getDefault())
     return dateFormat.format(date)
+}
+
+fun String.combineWithHost(): String {
+    return "$HOST/img/stores/banners/$this.png"
 }
 
 @Suppress("DEPRECATION")
