@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Deal(
     val dealId: String,
     val gameId: String,
+    val storeId: String,
     val title: String,
     val normalPrice: String,
     val salePrice: String,

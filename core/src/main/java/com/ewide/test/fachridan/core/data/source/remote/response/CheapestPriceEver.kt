@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class CheapestPriceEver(
 
 	@field:SerializedName("date")
-	val date: Long? = null,
+	val date: Long,
 
 	@field:SerializedName("price")
 	val price: String? = null

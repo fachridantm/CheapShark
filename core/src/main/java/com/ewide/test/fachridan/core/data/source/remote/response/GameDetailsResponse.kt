@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class GameDetailsResponse(
 
 	@field:SerializedName("cheapestPriceEver")
-	val cheapestPriceEver: CheapestPriceEver? = null,
+	val cheapestPriceEver: CheapestPriceEver,
 
 	@field:SerializedName("deals")
-	val deals: List<DealsItem>? = null,
+	val deals: List<DealsItem>,
 
 	@field:SerializedName("info")
 	val info: Info? = null

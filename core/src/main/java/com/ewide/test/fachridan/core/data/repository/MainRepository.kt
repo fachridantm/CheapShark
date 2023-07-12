@@ -7,6 +7,7 @@ import com.ewide.test.fachridan.core.data.source.Resource
 import com.ewide.test.fachridan.core.data.source.remote.RemoteDataSource
 import com.ewide.test.fachridan.core.data.source.remote.network.ApiResponse
 import com.ewide.test.fachridan.core.domain.model.Deal
+import com.ewide.test.fachridan.core.domain.model.GameDetails
 import com.ewide.test.fachridan.core.domain.repository.IMainRepository
 import com.ewide.test.fachridan.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
@@ -28,6 +29,7 @@ class MainRepository @Inject constructor(
 
                 is ApiResponse.Empty -> {
                     emit(Resource.Success(PagingData.empty()))
+                    emit(Resource.Error("No data found"))
                 }
 
                 is ApiResponse.Error -> {
@@ -35,7 +37,30 @@ class MainRepository @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            Log.e("MainRepository", "getCharacters: ${e.message}")
+            Log.e("MainRepository", "getListOfDeals: ${e.message}")
+            emit(Resource.Error("Something went wrong: ${e.message}"))
+        }
+    }
+
+    override fun getGameDetails(gameId: String): Flow<Resource<GameDetails>> = flow {
+        emit(Resource.Loading())
+        try {
+            when (val response = remoteDataSource.getGameDetails(gameId).first()) {
+                is ApiResponse.Success -> {
+                    val data = DataMapper.gameDetailsResponseToGameDetails(response.data)
+                    emit(Resource.Success(data))
+                }
+
+                is ApiResponse.Empty -> {
+                    emit(Resource.Error("No data found"))
+                }
+
+                is ApiResponse.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepository", "getGameDetails: ${e.message}")
             emit(Resource.Error("Something went wrong: ${e.message}"))
         }
     }
