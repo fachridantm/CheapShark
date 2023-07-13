@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemListSearchBinding
+import com.ewide.test.fachridan.core.databinding.ItemListGamesBinding
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.utils.loadImage
 
-class SearchAdapter(private val onItemClick: (Deal) -> Unit) :
-    ListAdapter<Deal, SearchAdapter.ViewHolder>(DIFF_CALLBACK) {
+class GamesAdapter(private val onItemClick: (Deal) -> Unit) :
+    ListAdapter<Deal, GamesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    inner class ViewHolder(private val binding: ItemListSearchBinding) :
+    inner class ViewHolder(private val binding: ItemListGamesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(deal: Deal) {
             with(binding) {
@@ -25,7 +25,7 @@ class SearchAdapter(private val onItemClick: (Deal) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemListSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemListGamesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.ewide.test.fachridan.core.data.source.Resource
 import com.ewide.test.fachridan.core.domain.model.Deal
-import com.ewide.test.fachridan.core.ui.SearchAdapter
+import com.ewide.test.fachridan.core.ui.GamesAdapter
 import com.ewide.test.fachridan.core.utils.Constants
 import com.ewide.test.fachridan.core.utils.showToast
 import com.ewide.test.fachridan.databinding.ActivitySearchResultBinding
@@ -20,7 +20,7 @@ class SearchResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchResultBinding
     private val searchViewModel: SearchViewModel by viewModels()
-    private val searchAdapter: SearchAdapter by lazy { SearchAdapter(::onItemClicked) }
+    private val gamesAdapter: GamesAdapter by lazy { GamesAdapter(::onItemClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +59,12 @@ class SearchResultActivity : AppCompatActivity() {
 
                 is Resource.Success -> {
                     if (it.data.isNullOrEmpty()) {
-                        searchAdapter.submitList(emptyList())
+                        gamesAdapter.submitList(emptyList())
                         showIsEmpty(true)
                     } else if (query.isEmpty()) {
-                        searchAdapter.submitList(emptyList())
+                        gamesAdapter.submitList(emptyList())
                     } else {
-                        searchAdapter.submitList(it.data)
+                        gamesAdapter.submitList(it.data)
                         showIsEmpty(false)
                     }
                     showLoading(false)
@@ -96,7 +96,7 @@ class SearchResultActivity : AppCompatActivity() {
         with(binding) {
             searchView.requestFocus()
             rvSearchResult.apply {
-                adapter = searchAdapter
+                adapter = gamesAdapter
                 setHasFixedSize(true)
             }
         }
