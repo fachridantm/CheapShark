@@ -16,7 +16,10 @@ import com.ewide.test.fachridan.core.data.source.Resource
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.ui.DealsAdapter
 import com.ewide.test.fachridan.core.ui.DealsLoadStateAdapter
+import com.ewide.test.fachridan.core.utils.Constants.DEFAULT
 import com.ewide.test.fachridan.core.utils.Constants.EXTRA_DATA
+import com.ewide.test.fachridan.core.utils.Constants.PRICE
+import com.ewide.test.fachridan.core.utils.Constants.TITLE
 import com.ewide.test.fachridan.core.utils.showToast
 import com.ewide.test.fachridan.databinding.ActivityMainBinding
 import com.ewide.test.fachridan.ui.details.GameDetailsActivity
@@ -48,7 +51,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is Resource.Success -> {
-                    showLoading(false)
                     if (it.data != null) {
                         dealsAdapter.submitData(lifecycle, it.data as PagingData<Deal>)
                         showIsEmpty(false)
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                         dealsAdapter.submitData(lifecycle, PagingData.empty())
                         showIsEmpty(true)
                     }
+                    showLoading(false)
                 }
 
                 is Resource.Error -> {
@@ -137,18 +140,15 @@ class MainActivity : AppCompatActivity() {
         btnSubmit.setOnClickListener {
             when (radioGroup.checkedRadioButtonId) {
                 R.id.rb_sort_default -> {
-                    // TODO: Sorting data by default
-                    getString(R.string.sort_default_label).showToast(this)
+                    bindSortingData(DEFAULT)
                 }
 
                 R.id.rb_sort_title -> {
-                    // TODO: Sorting data by title
-                    getString(R.string.sort_title_label).showToast(this)
+                    bindSortingData(TITLE)
                 }
 
                 R.id.rb_sort_price -> {
-                    // TODO: Sorting data by price
-                    getString(R.string.sort_price_label).showToast(this)
+                    bindSortingData(PRICE)
                 }
             }
             builder.dismiss()
@@ -160,6 +160,32 @@ class MainActivity : AppCompatActivity() {
             show()
         }
 
+    }
+
+    private fun bindSortingData(sortBy: String) {
+        viewModel.getSortListOfDeals(sortBy).observe(this) {
+            when (it) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+
+                is Resource.Success -> {
+                    if (it.data != null) {
+                        dealsAdapter.submitData(lifecycle, it.data as PagingData<Deal>)
+                        showIsEmpty(false)
+                    } else {
+                        dealsAdapter.submitData(lifecycle, PagingData.empty())
+                        showIsEmpty(true)
+                    }
+                    showLoading(false)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message?.showToast(this)
+                }
+            }
+        }
     }
 
     private fun onItemClicked(deal: Deal) {
