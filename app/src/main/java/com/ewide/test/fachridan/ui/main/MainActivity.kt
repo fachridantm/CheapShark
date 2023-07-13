@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
                     showLoading(false)
                     if (it.data != null) {
                         dealsAdapter.submitData(lifecycle, it.data as PagingData<Deal>)
-                        binding.tvMainEmpty.visibility = View.GONE
+                        showIsEmpty(false)
                     } else {
                         dealsAdapter.submitData(lifecycle, PagingData.empty())
-                        binding.tvMainEmpty.visibility = View.VISIBLE
+                        showIsEmpty(true)
                     }
                 }
 
@@ -69,6 +69,13 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading(state: Boolean) {
         binding.apply {
             pbMain.visibility = if (state) View.VISIBLE else View.GONE
+            rvDeals.visibility = if (state) View.INVISIBLE else View.VISIBLE
+        }
+    }
+
+    private fun showIsEmpty(state: Boolean) {
+        binding.apply {
+            tvMainEmpty.visibility = if (state) View.VISIBLE else View.GONE
             rvDeals.visibility = if (state) View.INVISIBLE else View.VISIBLE
         }
     }

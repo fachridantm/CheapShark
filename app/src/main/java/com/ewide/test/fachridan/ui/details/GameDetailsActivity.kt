@@ -75,17 +75,27 @@ class GameDetailsActivity : AppCompatActivity() {
 
                 if (data.deals.isEmpty()) {
                     storesAdapter.submitList(emptyList())
-                    tvGameDealsEmpty.visibility = View.VISIBLE
+                    showIsEmpty(true)
                 } else {
                     storesAdapter.submitList(data.deals)
-                    tvGameDealsEmpty.visibility = View.GONE
+                    showIsEmpty(false)
                 }
             }
         }
     }
 
     private fun showLoading(state: Boolean) {
-        binding.pbGameDetails.visibility = if (state) View.VISIBLE else View.GONE
+        binding.apply {
+            pbGameDetails.visibility = if (state) View.VISIBLE else View.GONE
+            rvGameDealsDetails.visibility = if (state) View.INVISIBLE else View.VISIBLE
+        }
+    }
+
+    private fun showIsEmpty(state: Boolean) {
+        binding.apply {
+            tvGameDealsEmpty.visibility = if (state) View.VISIBLE else View.GONE
+            rvGameDealsDetails.visibility = if (state) View.INVISIBLE else View.VISIBLE
+        }
     }
 
     private fun initView() {
