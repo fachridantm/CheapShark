@@ -2,7 +2,7 @@ package com.ewide.test.fachridan.core.data.source.remote.network
 
 import com.ewide.test.fachridan.core.data.source.remote.response.DealsResponseItem
 import com.ewide.test.fachridan.core.data.source.remote.response.GameDetailsResponse
-import com.ewide.test.fachridan.core.data.source.remote.response.StoresResponseItem
+import com.ewide.test.fachridan.core.utils.Constants.DEFAULT
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,6 +18,13 @@ interface MainApiService {
         @Query("id") gameId: String,
     ): GameDetailsResponse
 
-    @GET("stores")
-    suspend fun getListOfStores(): List<StoresResponseItem>
+    @GET("deals")
+    suspend fun getSearchDeals(
+        @Query("title") title: String,
+    ): List<DealsResponseItem>
+
+    @GET("deals")
+    suspend fun getSortListOfDeals(
+        @Query("sortBy") sortBy: String = DEFAULT,
+    ): List<DealsResponseItem>
 }

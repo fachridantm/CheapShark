@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface IMainRepository {
     fun getListOfDeals(): Flow<Resource<PagingData<Deal>>>
     fun getGameDetails(gameId: String): Flow<Resource<GameDetails>>
+    fun getSearchDeals(title: String): Flow<Resource<List<Deal>>>
 }

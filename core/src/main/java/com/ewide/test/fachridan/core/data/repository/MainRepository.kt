@@ -29,7 +29,7 @@ class MainRepository @Inject constructor(
 
                 is ApiResponse.Empty -> {
                     emit(Resource.Success(PagingData.empty()))
-                    emit(Resource.Error("No data found"))
+                    emit(Resource.Error("Data not found"))
                 }
 
                 is ApiResponse.Error -> {
@@ -52,7 +52,7 @@ class MainRepository @Inject constructor(
                 }
 
                 is ApiResponse.Empty -> {
-                    emit(Resource.Error("No data found"))
+                    emit(Resource.Error("Data not found"))
                 }
 
                 is ApiResponse.Error -> {
@@ -61,6 +61,29 @@ class MainRepository @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e("MainRepository", "getGameDetails: ${e.message}")
+            emit(Resource.Error("Something went wrong: ${e.message}"))
+        }
+    }
+
+    override fun getSearchDeals(title: String): Flow<Resource<List<Deal>>> = flow {
+        emit(Resource.Loading())
+        try {
+            when (val response = remoteDataSource.getSearchDeals(title).first()) {
+                is ApiResponse.Success -> {
+                    val data = response.data.map { DataMapper.dealsItemToDeal(it) }
+                    emit(Resource.Success(data))
+                }
+
+                is ApiResponse.Empty -> {
+                    emit(Resource.Error("Data not found"))
+                }
+
+                is ApiResponse.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepository", "getSearchDeals: ${e.message}")
             emit(Resource.Error("Something went wrong: ${e.message}"))
         }
     }

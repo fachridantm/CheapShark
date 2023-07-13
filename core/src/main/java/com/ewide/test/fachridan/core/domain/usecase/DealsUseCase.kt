@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface DealsUseCase {
     fun getListOfDeals() : Flow<Resource<PagingData<Deal>>>
+    fun getSearchDeals(title: String) : Flow<Resource<List<Deal>>>
 }
