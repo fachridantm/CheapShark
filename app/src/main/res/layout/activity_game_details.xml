@@ -25,6 +25,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/md_theme_dark_primary"
                 app:menu="@menu/menu_game_details"
+                app:navigationIcon="@drawable/ic_back"
                 app:title="@string/game_details_title"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/Text.Title" />
