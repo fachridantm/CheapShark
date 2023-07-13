@@ -9,4 +9,5 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val dealsUseCase: DealsUseCase) : ViewModel() {
     fun getListOfDeals() = dealsUseCase.getListOfDeals().asLiveData()
+    fun getSortListOfDeals(sortBy: String) = dealsUseCase.getSortListOfDeals(sortBy).asLiveData()
 }

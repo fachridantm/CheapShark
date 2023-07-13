@@ -87,4 +87,27 @@ class MainRepository @Inject constructor(
             emit(Resource.Error("Something went wrong: ${e.message}"))
         }
     }
+
+    override fun getSortListOfDeals(sortBy: String): Flow<Resource<List<Deal>>> = flow {
+        emit(Resource.Loading())
+        try {
+            when (val response = remoteDataSource.getSortListOfDeals(sortBy).first()) {
+                is ApiResponse.Success -> {
+                    val data = response.data.map { DataMapper.dealsItemToDeal(it) }
+                    emit(Resource.Success(data))
+                }
+
+                is ApiResponse.Empty -> {
+                    emit(Resource.Error("Data not found"))
+                }
+
+                is ApiResponse.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainRepository", "getSortListOfDeals: ${e.message}")
+            emit(Resource.Error("Something went wrong: ${e.message}"))
+        }
+    }
 }

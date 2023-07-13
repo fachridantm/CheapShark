@@ -104,4 +104,29 @@ class RemoteDataSource @Inject constructor(private val mainApiService: MainApiSe
             }
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getSortListOfDeals(sortBy: String): Flow<ApiResponse<List<DealsResponseItem>>> = flow {
+        try {
+            val response = mainApiService.getSortListOfDeals(sortBy)
+            emit(ApiResponse.Success(response))
+        } catch (e: Exception) {
+            when (e) {
+                is HttpException -> {
+                    val message = when (e.code()) {
+                        401 -> "Unauthorized"
+                        403 -> "Forbidden"
+                        404 -> "Not Found"
+                        else -> e.getErrorMessage().toString()
+                    }
+                    emit(ApiResponse.Error(message))
+                }
+
+                is UnknownHostException -> {
+                    emit(ApiResponse.Error("No internet connection"))
+                }
+
+                else -> emit(ApiResponse.Error(e.message.toString()))
+            }
+        }
+    }.flowOn(Dispatchers.IO)
 }

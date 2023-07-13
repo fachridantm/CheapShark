@@ -11,4 +11,5 @@ class DealsInteractor @Inject constructor(
 ) : DealsUseCase {
     override fun getListOfDeals() = mainRepository.getListOfDeals()
     override fun getSearchDeals(title: String): Flow<Resource<List<Deal>>> = mainRepository.getSearchDeals(title)
+    override fun getSortListOfDeals(sortBy: String): Flow<Resource<List<Deal>>> = mainRepository.getSortListOfDeals(sortBy)
 }
