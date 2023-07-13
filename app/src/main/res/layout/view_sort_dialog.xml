@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:buttonTint="@color/md_theme_light_primary"
-            android:checked="true"
             android:text="@string/sort_default_label" />
 
         <RadioButton
