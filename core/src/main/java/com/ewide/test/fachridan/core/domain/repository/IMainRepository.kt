@@ -11,5 +11,5 @@ interface IMainRepository {
     fun getGameDetails(gameId: String): Flow<Resource<GameDetails>>
     fun getSearchDeals(title: String): Flow<Resource<List<Deal>>>
 
-    fun getSortListOfDeals(sortBy: String): Flow<Resource<List<Deal>>>
+    fun getSortListOfDeals(sortBy: String): Flow<Resource<PagingData<Deal>>>
 }

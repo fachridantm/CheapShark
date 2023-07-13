@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.ewide.test.fachridan.core.data.source.remote.network.ApiResponse
 import com.ewide.test.fachridan.core.data.source.remote.network.MainApiService
 import com.ewide.test.fachridan.core.data.source.remote.paging.DealsPagingSource
+import com.ewide.test.fachridan.core.data.source.remote.paging.SortDealsPagingSource
 import com.ewide.test.fachridan.core.data.source.remote.response.DealsResponseItem
 import com.ewide.test.fachridan.core.data.source.remote.response.GameDetailsResponse
 import com.ewide.test.fachridan.core.utils.getErrorMessage
@@ -105,28 +106,33 @@ class RemoteDataSource @Inject constructor(private val mainApiService: MainApiSe
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getSortListOfDeals(sortBy: String): Flow<ApiResponse<List<DealsResponseItem>>> = flow {
-        try {
-            val response = mainApiService.getSortListOfDeals(sortBy)
-            emit(ApiResponse.Success(response))
-        } catch (e: Exception) {
-            when (e) {
-                is HttpException -> {
-                    val message = when (e.code()) {
-                        401 -> "Unauthorized"
-                        403 -> "Forbidden"
-                        404 -> "Not Found"
-                        else -> e.getErrorMessage().toString()
+    suspend fun getSortListOfDeals(sortBy: String): Flow<ApiResponse<PagingData<DealsResponseItem>>> = flow {
+        Pager(
+            config = PagingConfig(
+                pageSize = 50,
+            ),
+            pagingSourceFactory = { SortDealsPagingSource(mainApiService, sortBy) }
+        ).flow
+            .map { ApiResponse.Success(it) }
+            .catch { e ->
+                when (e) {
+                    is HttpException -> {
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            else -> e.getErrorMessage().toString()
+                        }
+                        emit(ApiResponse.Error(message))
                     }
-                    emit(ApiResponse.Error(message))
-                }
 
-                is UnknownHostException -> {
-                    emit(ApiResponse.Error("No internet connection"))
-                }
+                    is UnknownHostException -> {
+                        emit(ApiResponse.Error("No internet connection"))
+                    }
 
-                else -> emit(ApiResponse.Error(e.message.toString()))
-            }
-        }
+                    else -> emit(ApiResponse.Error(e.message.toString()))
+                }
+            }.flowOn(Dispatchers.IO)
+            .collect { emit(it) }
     }.flowOn(Dispatchers.IO)
 }

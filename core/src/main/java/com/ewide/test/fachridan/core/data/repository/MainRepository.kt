@@ -88,7 +88,7 @@ class MainRepository @Inject constructor(
         }
     }
 
-    override fun getSortListOfDeals(sortBy: String): Flow<Resource<List<Deal>>> = flow {
+    override fun getSortListOfDeals(sortBy: String): Flow<Resource<PagingData<Deal>>> = flow {
         emit(Resource.Loading())
         try {
             when (val response = remoteDataSource.getSortListOfDeals(sortBy).first()) {
