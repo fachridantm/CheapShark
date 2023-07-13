@@ -80,7 +80,7 @@ fun Long.toDate(): String {
 }
 
 fun String.combineWithHost(): String {
-    return "$HOST/img/stores/banners/$this.png"
+    return "$HOST/img/stores/logos/$this.png"
 }
 
 @Suppress("DEPRECATION")

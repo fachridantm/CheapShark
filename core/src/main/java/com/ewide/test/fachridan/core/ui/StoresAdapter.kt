@@ -24,7 +24,7 @@ class StoresAdapter(private val onItemClick: (Store) -> Unit) :
                     showStrikeThrough()
                 }
                 itemStoreTvSalePrice.text = store.salePrice.convertToPrice()
-                itemStoreIvBanner.loadImage(store.storeLogo.combineWithHost())
+                itemStoreIvLogo.loadImage(store.storeLogo.combineWithHost())
                 itemView.setOnClickListener { onItemClick(store) }
             }
         }
