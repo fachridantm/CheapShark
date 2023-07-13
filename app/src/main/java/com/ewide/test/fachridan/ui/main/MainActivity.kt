@@ -1,6 +1,7 @@
 package com.ewide.test.fachridan.ui.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
@@ -119,8 +120,8 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         R.id.action_favorite -> {
-                            // TODO: Intent to Favorite Activity
-                            getString(R.string.favorite).showToast(this@MainActivity)
+                            val uri = Uri.parse("cheapshark://favorite")
+                            startActivity(Intent(Intent.ACTION_VIEW, uri))
                             true
                         }
 

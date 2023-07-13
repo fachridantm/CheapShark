@@ -11,6 +11,7 @@ import com.ewide.test.fachridan.core.domain.model.GameDetails
 import com.ewide.test.fachridan.core.domain.model.Store
 import com.ewide.test.fachridan.core.ui.StoresAdapter
 import com.ewide.test.fachridan.core.utils.Constants.EXTRA_DATA
+import com.ewide.test.fachridan.core.utils.Event
 import com.ewide.test.fachridan.core.utils.convertToPrice
 import com.ewide.test.fachridan.core.utils.getParcelableData
 import com.ewide.test.fachridan.core.utils.loadImage
@@ -34,6 +35,7 @@ class GameDetailsActivity : AppCompatActivity() {
 
         initData()
         initView()
+        initFavorite()
         initAction()
     }
 
@@ -99,30 +101,56 @@ class GameDetailsActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        with(binding) {
-            rvGameDealsDetails.apply {
-                setHasFixedSize(true)
-                adapter = storesAdapter
+        binding.rvGameDealsDetails.apply {
+            setHasFixedSize(true)
+            adapter = storesAdapter
+        }
+    }
+
+    private fun initFavorite() {
+        viewModel.getFavoriteGames().observe(this@GameDetailsActivity) { deals ->
+            val data = intent.getParcelableData<Deal>(EXTRA_DATA)
+            data?.let {
+                val isFavorite = deals.any { game -> game.gameId == data.gameId }
+                setFavoriteIcon(isFavorite)
+                setFavoriteOnClickListener(isFavorite, it)
             }
         }
     }
 
-    private fun initAction() {
-        with(binding) {
-            toolbarGameDetails.apply {
-                setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.action_add_favorite -> {
-
-                            true
-                        }
-
-                        else -> false
-                    }
-                }
+    private fun setFavoriteIcon(isFavorite: Boolean) {
+        binding.toolbarGameDetails.menu.findItem(R.id.action_add_favorite).apply {
+            if (isFavorite) {
+                icon = getDrawable(R.drawable.ic_favorite)
+            } else {
+                icon = getDrawable(R.drawable.ic_unfavorite)
             }
         }
+    }
+
+    private fun setFavoriteOnClickListener(isFavorite: Boolean, data: Deal) {
+        binding.toolbarGameDetails.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_add_favorite -> {
+                    viewModel.apply {
+                        setFavoriteGames(data, !isFavorite, this@GameDetailsActivity)
+                        toast.observe(this@GameDetailsActivity, ::showToast)
+                    }
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun showToast(eventMessage: Event<String>) {
+        val message = eventMessage.getContentIfNotHandled() ?: return
+        message.showToast(this)
+    }
+
+    private fun initAction() {
+        binding.toolbarGameDetails.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun onItemClicked(store: Store) {

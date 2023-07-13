@@ -15,7 +15,15 @@
     <application android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".ui.FavoriteActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="favorite"
+                    android:scheme="cheapshark" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

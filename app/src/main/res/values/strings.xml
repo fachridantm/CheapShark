@@ -19,4 +19,7 @@
     <string name="ends_date">Grab it now before %s</string>
     <string name="check_other_stores">Check other stores</string>
     <string name="data_not_found">Data not found.</string>
+
+    <string name="save_favorite">Save %s to favorites</string>
+    <string name="remove_favorite">Remove %s from favorites</string>
 </resources>
