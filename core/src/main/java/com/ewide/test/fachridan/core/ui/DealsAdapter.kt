@@ -44,11 +44,11 @@ class DealsAdapter(private val onItemClick: (Deal) -> Unit) :
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Deal>() {
             override fun areItemsTheSame(oldItem: Deal, newItem: Deal): Boolean {
-                return oldItem.dealId == newItem.dealId
+                return oldItem.gameId == newItem.gameId
             }
 
             override fun areContentsTheSame(oldItem: Deal, newItem: Deal): Boolean {
-                return oldItem == newItem
+                return oldItem.gameId == newItem.gameId
             }
         }
     }
