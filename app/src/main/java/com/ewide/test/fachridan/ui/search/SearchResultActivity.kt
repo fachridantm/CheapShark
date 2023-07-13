@@ -58,7 +58,6 @@ class SearchResultActivity : AppCompatActivity() {
                 }
 
                 is Resource.Success -> {
-                    showLoading(false)
                     if (it.data.isNullOrEmpty()) {
                         searchAdapter.submitList(emptyList())
                         showIsEmpty(true)
@@ -68,6 +67,7 @@ class SearchResultActivity : AppCompatActivity() {
                         searchAdapter.submitList(it.data)
                         showIsEmpty(false)
                     }
+                    showLoading(false)
                 }
 
                 is Resource.Error -> {

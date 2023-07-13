@@ -47,8 +47,8 @@ class GameDetailsActivity : AppCompatActivity() {
                     }
 
                     is Resource.Success -> {
-                        showLoading(false)
                         bindData(it.data)
+                        showLoading(false)
                     }
 
                     is Resource.Error -> {
