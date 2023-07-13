@@ -1,5 +1,6 @@
 package com.ewide.test.fachridan.core.utils
 
+import com.ewide.test.fachridan.core.data.source.local.entity.DealEntity
 import com.ewide.test.fachridan.core.data.source.remote.response.DealsResponseItem
 import com.ewide.test.fachridan.core.data.source.remote.response.GameDetailsResponse
 import com.ewide.test.fachridan.core.domain.model.CheapestPrice
@@ -37,5 +38,29 @@ object DataMapper {
             thumb = data.info?.thumb ?: "-",
             title = data.info?.title ?: "-",
         ),
+    )
+
+    fun dealEntityToDeal(data: List<DealEntity>): List<Deal> = data.map {
+        Deal(
+            dealId = it.dealId,
+            gameId = it.gameId,
+            storeId = it.storeId,
+            title = it.title,
+            normalPrice = it.normalPrice,
+            salePrice = it.salePrice,
+            thumb = it.thumb,
+            isFavorite = it.isFavorite,
+        )
+    }
+
+    fun dealToDealEntity(data: Deal): DealEntity = DealEntity(
+        dealId = data.dealId,
+        gameId = data.gameId,
+        storeId = data.storeId,
+        title = data.title,
+        normalPrice = data.normalPrice,
+        salePrice = data.salePrice,
+        thumb = data.thumb,
+        isFavorite = data.isFavorite,
     )
 }

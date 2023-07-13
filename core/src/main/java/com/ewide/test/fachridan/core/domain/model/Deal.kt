@@ -12,4 +12,5 @@ data class Deal(
     val normalPrice: String,
     val salePrice: String,
     val thumb: String,
+    var isFavorite: Boolean = false,
 ) : Parcelable
