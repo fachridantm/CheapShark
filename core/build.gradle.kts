@@ -11,7 +11,7 @@ plugins {
 apply(from = "../shared_dependencies.gradle")
 
 android {
-    namespace = "com.ewide.test.fachridan"
+    namespace = "com.technical.test.fachridan.core"
     compileSdk = 34
 
     defaultConfig {

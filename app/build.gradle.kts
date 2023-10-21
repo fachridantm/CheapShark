@@ -10,11 +10,11 @@ plugins {
 apply(from = "../shared_dependencies.gradle")
 
 android {
-    namespace = "com.ewide.test.fachridan"
+    namespace = "com.technical.test.fachridan"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ewide.test.fachridan"
+        applicationId = "com.technical.test.fachridan"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
