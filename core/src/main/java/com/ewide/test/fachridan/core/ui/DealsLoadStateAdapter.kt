@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemDealsLoadStateBinding
+import com.ewide.test.fachridan.databinding.ItemDealsLoadStateBinding
 
 class DealsLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<DealsLoadStateAdapter.LoadingStateViewHolder>() {

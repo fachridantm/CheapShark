@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.load.engine.GlideException
-import com.ewide.test.fachridan.core.BuildConfig.HOST
-import com.ewide.test.fachridan.core.R
+import com.ewide.test.fachridan.BuildConfig.HOST
+import com.ewide.test.fachridan.R
 import com.ewide.test.fachridan.core.di.GlideApp
 import com.ewide.test.fachridan.core.di.GlideOptions
 import com.google.android.material.snackbar.Snackbar

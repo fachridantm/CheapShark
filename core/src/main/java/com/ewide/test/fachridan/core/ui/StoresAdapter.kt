@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemListStoreBinding
 import com.ewide.test.fachridan.core.domain.model.Store
 import com.ewide.test.fachridan.core.utils.combineWithHost
 import com.ewide.test.fachridan.core.utils.convertToPrice
 import com.ewide.test.fachridan.core.utils.loadImage
 import com.ewide.test.fachridan.core.utils.showStrikeThrough
+import com.ewide.test.fachridan.databinding.ItemListStoreBinding
 
 class StoresAdapter(private val onItemClick: (Store) -> Unit) :
     ListAdapter<Store, StoresAdapter.ViewHolder>(DIFF_CALLBACK) {

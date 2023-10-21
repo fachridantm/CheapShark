@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemListGamesBinding
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.utils.loadImage
+import com.ewide.test.fachridan.databinding.ItemListGamesBinding
 
 class GamesAdapter(private val onItemClick: (Deal) -> Unit) :
     ListAdapter<Deal, GamesAdapter.ViewHolder>(DIFF_CALLBACK) {

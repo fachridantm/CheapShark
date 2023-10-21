@@ -1,7 +1,6 @@
 package com.ewide.test.fachridan.core.di
 
-import com.ewide.test.fachridan.core.BuildConfig.DEBUG
-import com.ewide.test.fachridan.core.BuildConfig.BASE_URL
+import com.ewide.test.fachridan.BuildConfig.*
 import com.ewide.test.fachridan.core.data.source.remote.network.MainApiService
 import dagger.Module
 import dagger.Provides

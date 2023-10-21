@@ -2,7 +2,7 @@ package com.ewide.test.fachridan.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ewide.test.fachridan.core.BuildConfig.PASSPHRASE
+import com.ewide.test.fachridan.BuildConfig.PASSPHRASE
 import com.ewide.test.fachridan.core.data.source.local.room.AppDatabase
 import dagger.Module
 import dagger.Provides

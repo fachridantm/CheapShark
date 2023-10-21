@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ewide.test.fachridan.core.databinding.ItemListDealBinding
 import com.ewide.test.fachridan.core.domain.model.Deal
 import com.ewide.test.fachridan.core.utils.convertToPrice
 import com.ewide.test.fachridan.core.utils.loadImage
 import com.ewide.test.fachridan.core.utils.showStrikeThrough
+import com.ewide.test.fachridan.databinding.ItemListDealBinding
 
 class DealsAdapter(private val onItemClick: (Deal) -> Unit) :
     PagingDataAdapter<Deal, DealsAdapter.ViewHolder>(DIFF_CALLBACK) {
