@@ -20,3 +20,4 @@ This app is powered by the [CheapShark API](https://apidocs.cheapshark.com/).
 - Glide
 - ViewBinding
 - Material Design 3
+- Kotlin DSL
