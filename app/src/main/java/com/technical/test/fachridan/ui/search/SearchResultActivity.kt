@@ -38,8 +38,7 @@ class SearchResultActivity : AppCompatActivity() {
             searchView.setOnQueryTextListener(object :
                 SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    binding.searchView.clearFocus()
-                    return true
+                    return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
@@ -56,14 +55,13 @@ class SearchResultActivity : AppCompatActivity() {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
+                    showIsEmpty(false)
                 }
 
                 is Resource.Success -> {
                     if (it.data.isNullOrEmpty()) {
-                        binding.searchView.clearFocus()
                         gamesAdapter.submitList(emptyList())
                         showIsEmpty(true)
-                        it.message?.showToast(this)
                     } else if (query.isEmpty()) {
                         binding.rvSearchResult.visibility = View.INVISIBLE
                         gamesAdapter.submitList(emptyList())
@@ -76,6 +74,7 @@ class SearchResultActivity : AppCompatActivity() {
 
                 is Resource.Error -> {
                     showLoading(false)
+                    showIsEmpty(true)
                     it.message?.showToast(this)
                 }
             }
